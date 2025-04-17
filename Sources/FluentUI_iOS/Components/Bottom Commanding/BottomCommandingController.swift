@@ -354,6 +354,8 @@ open class BottomCommandingController: UIViewController, TokenizedControl {
     public var tokenSet: BottomCommandingTokenSet = .init()
 
     var fluentTheme: FluentTheme { return view.fluentTheme }
+	
+	private let customBackgroundColor = UIColor(red: 231.0/255.0, green: 236.0/255.0, blue: 243.0/255.0, alpha: 0.70)
 
     private func setupCommandingLayout(traitCollection: UITraitCollection, forceLayoutPass: Bool = false) {
         if traitCollection.horizontalSizeClass == .regular && traitCollection.userInterfaceIdiom == .pad {
@@ -450,7 +452,8 @@ open class BottomCommandingController: UIViewController, TokenizedControl {
         let bottomBarView = UIView()
 
         let roundedCornerView = UIView()
-        roundedCornerView.backgroundColor = tokenSet[.backgroundColor].uiColor
+//        roundedCornerView.backgroundColor = tokenSet[.backgroundColor].uiColor
+		roundedCornerView.backgroundColor = customBackgroundColor
         roundedCornerView.translatesAutoresizingMaskIntoConstraints = false
         roundedCornerView.layer.cornerRadius = tokenSet[.cornerRadius].float
         roundedCornerView.layer.cornerCurve = .continuous
@@ -601,7 +604,8 @@ open class BottomCommandingController: UIViewController, TokenizedControl {
         guard let bottomBarBackgroundView else {
             return
         }
-        bottomBarBackgroundView.backgroundColor = tokenSet[.backgroundColor].uiColor
+//        bottomBarBackgroundView.backgroundColor = tokenSet[.backgroundColor].uiColor
+		bottomBarBackgroundView.backgroundColor = customBackgroundColor
         bottomBarBackgroundView.layer.cornerRadius = tokenSet[.cornerRadius].float
     }
 
@@ -1047,7 +1051,8 @@ open class BottomCommandingController: UIViewController, TokenizedControl {
 
     private var isInSheetMode: Bool { bottomSheetController != nil }
 
-    private var isExpandable: Bool { visibleExpandedListSections.count > 0 }
+//    private var isExpandable: Bool { visibleExpandedListSections.count > 0 }
+	private var isExpandable: Bool { false }
 
     /// Returns `true` if a more button should be shown.
     ///
