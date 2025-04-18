@@ -40,7 +40,51 @@ class BottomCommandingDemoController: DemoController {
             bottomCommandingVC.view.topAnchor.constraint(equalTo: view.topAnchor),
             bottomCommandingVC.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        view.addSubview(floatingBar)
+        let safe = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            floatingBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            floatingBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            floatingBar.bottomAnchor.constraint(equalTo: safe.bottomAnchor, constant: -88),
+            floatingBar.heightAnchor.constraint(equalToConstant: 60)
+        ])
+
+        // 3️⃣ Add your 5 icon buttons inside the blur’s contentView
+        let btnStack = UIStackView()
+        btnStack.axis = .horizontal
+        btnStack.distribution = .fillEqually
+        btnStack.translatesAutoresizingMaskIntoConstraints = false
+
+        floatingBar.contentView.addSubview(btnStack)
+        NSLayoutConstraint.activate([
+            btnStack.topAnchor.constraint(equalTo: floatingBar.contentView.topAnchor),
+            btnStack.bottomAnchor.constraint(equalTo: floatingBar.contentView.bottomAnchor),
+            btnStack.leadingAnchor.constraint(equalTo: floatingBar.contentView.leadingAnchor),
+            btnStack.trailingAnchor.constraint(equalTo: floatingBar.contentView.trailingAnchor)
+        ])
+
+        let icons = ["house", "magnifyingglass", "plus.app", "heart", "person"]
+        for sym in icons {
+            let b = UIButton(type: .system)
+            b.setImage(UIImage(systemName: sym), for: .normal)
+            b.tintColor = .label
+            btnStack.addArrangedSubview(b)
+        }
     }
+    
+    private let floatingBar: UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .systemUltraThinMaterial)
+        let v = UIVisualEffectView(effect: blur)
+        v.translatesAutoresizingMaskIntoConstraints = false
+
+        // ↓ RoundedRectangle(cornerRadius: 16, style: .continuous) in UIKit:
+        v.layer.cornerRadius = 16
+        v.layer.cornerCurve  = .continuous    // smooth, iOS13+ curve
+        v.clipsToBounds      = true
+
+        return v
+    }()
 
     private var mainTableViewController: UITableViewController?
 

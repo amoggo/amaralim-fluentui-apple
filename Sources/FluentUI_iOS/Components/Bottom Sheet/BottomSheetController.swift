@@ -439,6 +439,7 @@ public class BottomSheetController: UIViewController, Shadowable, TokenizedContr
     // |--overflowView
     public override func loadView() {
         view = BottomSheetPassthroughView()
+		view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.addLayoutGuide(sheetLayoutGuide)
 
@@ -650,58 +651,7 @@ public class BottomSheetController: UIViewController, Shadowable, TokenizedContr
     }()
 
     private func makeBottomSheetByEmbedding(contentView: UIView) -> UIView {
-		// PROTOTYPE 1: add UIVisualEffectView in the view hierarchy
-//        let bottomSheetView = UIView()
-//		
-//		let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-//		let blurView = UIVisualEffectView(effect: blurEffect) // Make a visual effect view with that blur
-//		blurView.translatesAutoresizingMaskIntoConstraints = false
-//
-//		bottomSheetView.insertSubview(blurView, at:0)
-//		NSLayoutConstraint.activate([
-//			blurView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor),
-//			blurView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor),
-//			blurView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor),
-//			blurView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
-//		])
-//		
-//		// TODO: try to add blurView directly to this ContentViewController's .view, instead of to the bottomSheetView
-////		view.insertSubview(blurView, at:0)
-////		NSLayoutConstraint.activate([
-////			blurView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor),
-////			blurView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor),
-////			blurView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor),
-////			blurView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
-////		])
-//		
-//		contentView.translatesAutoresizingMaskIntoConstraints = false
-//		contentView.layer.cornerCurve = .continuous
-//		contentView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-//		contentView.clipsToBounds = true
-//
-//		// We need to set the background color of the embedding view otherwise the shadows will not display
-////      bottomSheetView.backgroundColor = tokenSet[.backgroundColor].uiColor
-////		bottomSheetView.alpha = 0.0
-//
-//		bottomSheetView.layer.cornerRadius = tokenSet[.cornerRadius].float
-//		bottomSheetView.addSubview(contentView)
-//
-//		NSLayoutConstraint.activate([
-//			contentView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor),
-//			contentView.trailingAnchor.constraint(equalTo: bottomSheetView.trailingAnchor),
-//			contentView.topAnchor.constraint(equalTo: bottomSheetView.topAnchor),
-//			contentView.bottomAnchor.constraint(equalTo: bottomSheetView.bottomAnchor)
-//		])
-//
-//#if DEBUG
-//		bottomSheetView.accessibilityIdentifier = "Bottom Sheet View"
-//#endif
-//
-//		return bottomSheetView
-
-		// PROTOTYPE 2: Make the bottomsheetView the blur view.
-
-		let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+		let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
 		let bottomSheetView = UIVisualEffectView(effect: blurEffect)
 
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -711,11 +661,10 @@ public class BottomSheetController: UIViewController, Shadowable, TokenizedContr
 
         // We need to set the background color of the embedding view otherwise the shadows will not display
 //      bottomSheetView.backgroundColor = tokenSet[.backgroundColor].uiColor
-//		bottomSheetView.alpha = 0.0
 
         bottomSheetView.layer.cornerRadius = tokenSet[.cornerRadius].float
 		bottomSheetView.contentView.addSubview(contentView)
-//        bottomSheetView.addSubview(contentView) // Don't do this! instead add to contentView
+//      bottomSheetView.addSubview(contentView) // Don't do this! instead add to contentView
 
         NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: bottomSheetView.leadingAnchor),
