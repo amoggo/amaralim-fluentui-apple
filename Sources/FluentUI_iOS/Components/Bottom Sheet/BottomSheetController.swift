@@ -554,11 +554,11 @@ public class BottomSheetController: UIViewController, Shadowable, TokenizedContr
     }
 
     private func updateBackgroundColor() {
-        let backgroundColor = tokenSet[.backgroundColor].uiColor
+//        let backgroundColor = tokenSet[.backgroundColor].uiColor
 //		let backgroundColor = UIColor(red: 231.0/255.0, green: 236.0/255.0, blue: 243.0/255.0, alpha: 0.70)
 		
-        bottomSheetView.subviews[0].backgroundColor = backgroundColor
-        overflowView.backgroundColor = backgroundColor
+//        bottomSheetView.subviews[0].backgroundColor = backgroundColor
+//        overflowView.backgroundColor = backgroundColor
     }
 
     private func updateResizingHandleColor() {

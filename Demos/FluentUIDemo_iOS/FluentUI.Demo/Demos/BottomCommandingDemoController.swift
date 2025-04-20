@@ -24,12 +24,17 @@ class BottomCommandingDemoController: DemoController {
         optionTableView.separatorStyle = .none
 
         let bottomCommandingVC = BottomCommandingController(with: optionTableViewController)
+
+
         bottomCommandingVC.heroItems = Array(heroItems.prefix(9))
 //        bottomCommandingVC.expandedListSections = shortCommandSectionList
         bottomCommandingVC.delegate = self
 
         addChild(bottomCommandingVC)
         view.addSubview(bottomCommandingVC.view)
+
+//        bottomCommandingVC.modalPresentationStyle = .overCurrentContext
+
         bottomCommandingVC.didMove(toParent: self)
 
         bottomCommandingController = bottomCommandingVC

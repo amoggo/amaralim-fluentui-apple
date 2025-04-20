@@ -409,9 +409,12 @@ open class BottomCommandingController: UIViewController, TokenizedControl {
         sheetController.isHidden = isHidden
         sheetController.shouldAlwaysFillWidth = sheetShouldAlwaysFillWidth
         sheetController.delegate = self
-
+				
         addChild(sheetController)
         view.addSubview(sheetController.view)
+
+//		sheetController.modalPresentationStyle = .overCurrentContext
+
         sheetController.didMove(toParent: self)
 
         // We need to keep a reference to this because the margin changes based on expandability
